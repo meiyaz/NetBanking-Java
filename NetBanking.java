@@ -144,18 +144,54 @@ public class NetBanking extends JFrame implements ActionListener {
 
     private JPanel createProfilePanel() {
         JPanel p = new JPanel(null);
-        JLabel l = new JLabel("User Profile (Coming Soon)");
-        l.setBounds(100, 100, 300, 30);
-        p.add(l);
+        
+        JLabel lTitle = new JLabel("USER PROFILE");
+        lTitle.setFont(new Font("Arial", Font.BOLD, 20));
+        lTitle.setBounds(300, 30, 200, 30);
+        p.add(lTitle);
+
+        int y = 100;
+        addProfileField(p, "USER NAME :", currentUser.name, y); y += 50;
+        addProfileField(p, "ACCOUNT NO :", currentUser.accountNumber, y); y += 50;
+        addProfileField(p, "ADDRESS :", currentUser.address, y); y += 50;
+        addProfileField(p, "PHONE NO :", currentUser.phoneNumber, y); y += 50;
+        addProfileField(p, "MODE :", currentUser.mode, y); y += 50;
+        addProfileField(p, "OPENING DATE :", currentUser.dateOfOpening, y); y += 50;
+        addProfileField(p, "ATM NO :", currentUser.atmNumber, y); y += 50;
+        addProfileField(p, "VALIDITY :", currentUser.cardValidity, y);
+
         addBackButton(p);
         return p;
     }
 
+    private void addProfileField(JPanel p, String label, String value, int y) {
+        JLabel l = new JLabel(label);
+        l.setBounds(100, y, 150, 30);
+        p.add(l);
+        
+        JTextField t = new JTextField(value);
+        t.setBounds(300, y, 250, 30);
+        t.setEditable(false);
+        p.add(t);
+    }
+
     private JPanel createBalancePanel() {
         JPanel p = new JPanel(null);
-        JLabel l = new JLabel("Check Balance (Coming Soon)");
-        l.setBounds(100, 100, 300, 30);
-        p.add(l);
+        
+        JLabel lTitle = new JLabel("VERIFY BALANCE");
+        lTitle.setFont(new Font("Arial", Font.BOLD, 20));
+        lTitle.setBounds(300, 50, 300, 30);
+        p.add(lTitle);
+
+        JLabel lBal = new JLabel("CURRENT BALANCE :");
+        lBal.setBounds(150, 200, 150, 30);
+        p.add(lBal);
+        
+        JTextField tBal = new JTextField("Rs. " + currentUser.balance);
+        tBal.setBounds(350, 200, 200, 30);
+        tBal.setEditable(false);
+        p.add(tBal);
+
         addBackButton(p);
         return p;
     }
