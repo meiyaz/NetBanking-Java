@@ -257,9 +257,44 @@ public class NetBanking extends JFrame implements ActionListener {
 
     private JPanel createComplaintPanel() {
         JPanel p = new JPanel(null);
-        JLabel l = new JLabel("Complaints (Coming Soon)");
-        l.setBounds(100, 100, 300, 30);
-        p.add(l);
+        
+        JLabel lTitle = new JLabel("COMPLAINT BOX");
+        lTitle.setFont(new Font("Arial", Font.BOLD, 20));
+        lTitle.setBounds(300, 30, 250, 30);
+        p.add(lTitle);
+
+        JLabel lDesc = new JLabel("DESCRIBE YOUR ISSUE:");
+        lDesc.setBounds(50, 80, 200, 30);
+        p.add(lDesc);
+
+        JTextArea txtArea = new JTextArea();
+        txtArea.setLineWrap(true);
+        JScrollPane scroll = new JScrollPane(txtArea);
+        scroll.setBounds(50, 120, 700, 200);
+        p.add(scroll);
+
+        JButton btnSubmit = new JButton("SUBMIT COMPLAINT");
+        btnSubmit.setBounds(250, 340, 200, 40);
+        p.add(btnSubmit);
+        
+        btnSubmit.addActionListener(e -> {
+            if (txtArea.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Complaint cannot be empty!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Complaint Registered Successfully! Reference ID: " + (int)(Math.random()*10000));
+                txtArea.setText("");
+            }
+        });
+
+        // Contact Info
+        JLabel lContact = new JLabel("CUSTOMER CARE : 95249 14630");
+        lContact.setBounds(450, 400, 300, 30);
+        p.add(lContact);
+
+        JLabel lEmail = new JLabel("EMAIL: mknetbanking@gmail.com");
+        lEmail.setBounds(450, 440, 300, 30);
+        p.add(lEmail);
+
         addBackButton(p);
         return p;
     }
