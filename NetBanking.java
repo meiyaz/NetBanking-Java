@@ -2,6 +2,14 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+/**
+ * NetBanking Application
+ * A comprehensive simulation of a NetBanking interface.
+ * Features: Login, Dashboard, Profile View, Balance Check, Transfer Money, and Complaints.
+ * 
+ * @version 1.0
+ * @since 2020-01-24
+ */
 public class NetBanking extends JFrame implements ActionListener {
     
     // Core Components
