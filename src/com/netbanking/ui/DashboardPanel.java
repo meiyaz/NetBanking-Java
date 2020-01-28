@@ -39,6 +39,11 @@ public class DashboardPanel extends BasePanel {
         btnComplaint.addActionListener(e -> controller.showCard("Complaints"));
         add(btnComplaint);
         
+        JButton btnHistory = new JButton("HISTORY");
+        btnHistory.setBounds(250, 270, 200, 40);
+        btnHistory.addActionListener(e -> controller.showCard("Transactions"));
+        add(btnHistory);
+        
         JButton btnLogout = new JButton("LOGOUT");
         btnLogout.setBounds(250, 350, 200, 40);
         btnLogout.addActionListener(e -> controller.showCard("Login"));

@@ -33,6 +33,7 @@ public class NetBankingFrame extends JFrame {
         mainPanel.add(new BalancePanel(this, currentUser), "Balance");
         mainPanel.add(new TransferPanel(this, currentUser), "Transfer");
         mainPanel.add(new ComplaintPanel(this), "Complaints");
+        mainPanel.add(new TransactionPanel(this, currentUser), "Transactions");
 
         add(mainPanel);
         

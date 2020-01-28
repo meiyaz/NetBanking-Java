@@ -2,7 +2,10 @@ package com.netbanking.ui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import com.netbanking.model.User;
+import com.netbanking.model.Transaction;
 
 public class TransferPanel extends BasePanel {
     private User user;
@@ -56,6 +59,11 @@ public class TransferPanel extends BasePanel {
                     JOptionPane.showMessageDialog(this, "Insufficient Balance");
                 } else {
                     user.setBalance(user.getBalance() - amount);
+                    
+                    String date = new SimpleDateFormat("dd-MMM-yyyy").format(new Date());
+                    Transaction t = new Transaction(date, "DEBIT", "Transfer to " + tAcc.getText(), amount, user.getBalance());
+                    user.addTransaction(t);
+                    
                     lCurrentBal.setText("Rs. " + user.getBalance());
                     JOptionPane.showMessageDialog(this, "Transfer Successful! New Balance: " + user.getBalance());
                     tAmt.setText("");
