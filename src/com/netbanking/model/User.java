@@ -12,15 +12,20 @@ public class User {
     private String dateOfOpening;
     private String atmNumber;
     private String cardValidity;
-    private double balance;
+    private Double balance;
     private List<Transaction> transactions;
+    private List<Beneficiary> beneficiaries;
 
     public User(String name, String an, String ad, String ph, String mo, String dob, String atm, String val, double bal) {
         this.name = name; this.accountNumber = an; this.address = ad; this.phoneNumber = ph;
         this.mode = mo; this.dateOfOpening = dob; this.atmNumber = atm; this.cardValidity = val; this.balance = bal;
         this.transactions = new ArrayList<>();
+        this.beneficiaries = new ArrayList<>();
         // Add dummy initial transaction
         transactions.add(new Transaction("01-JAN-2020", "CREDIT", "Opening Balance", bal, bal));
+        
+        // Add dummy beneficiary
+        beneficiaries.add(new Beneficiary("Hari", "123456789", "SBI", "SBI0001", 50000));
     }
 
     // Getters
@@ -34,8 +39,10 @@ public class User {
     public String getCardValidity() { return cardValidity; }
     public double getBalance() { return balance; }
     public List<Transaction> getTransactions() { return transactions; }
+    public List<Beneficiary> getBeneficiaries() { return beneficiaries; }
     
     // Setters
     public void setBalance(double balance) { this.balance = balance; }
     public void addTransaction(Transaction t) { this.transactions.add(t); }
+    public void addBeneficiary(Beneficiary b) { this.beneficiaries.add(b); }
 }
