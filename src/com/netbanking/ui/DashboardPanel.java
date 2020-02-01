@@ -49,8 +49,13 @@ public class DashboardPanel extends BasePanel {
         btnBene.addActionListener(e -> controller.showCard("Beneficiaries"));
         add(btnBene);
         
+        JButton btnSettings = new JButton("SETTINGS");
+        btnSettings.setBounds(100, 350, 200, 40);
+        btnSettings.addActionListener(e -> controller.showCard("Settings"));
+        add(btnSettings);
+        
         JButton btnLogout = new JButton("LOGOUT");
-        btnLogout.setBounds(250, 350, 200, 40);
+        btnLogout.setBounds(400, 350, 200, 40);
         btnLogout.addActionListener(e -> controller.showCard("Login"));
         add(btnLogout);
     }

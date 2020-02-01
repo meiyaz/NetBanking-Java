@@ -13,12 +13,14 @@ public class User {
     private String atmNumber;
     private String cardValidity;
     private Double balance;
+    private String password;
     private List<Transaction> transactions;
     private List<Beneficiary> beneficiaries;
 
     public User(String name, String an, String ad, String ph, String mo, String dob, String atm, String val, double bal) {
         this.name = name; this.accountNumber = an; this.address = ad; this.phoneNumber = ph;
         this.mode = mo; this.dateOfOpening = dob; this.atmNumber = atm; this.cardValidity = val; this.balance = bal;
+        this.password = "admin123";
         this.transactions = new ArrayList<>();
         this.beneficiaries = new ArrayList<>();
         // Add dummy initial transaction
@@ -38,11 +40,13 @@ public class User {
     public String getAtmNumber() { return atmNumber; }
     public String getCardValidity() { return cardValidity; }
     public double getBalance() { return balance; }
+    public String getPassword() { return password; }
     public List<Transaction> getTransactions() { return transactions; }
     public List<Beneficiary> getBeneficiaries() { return beneficiaries; }
     
     // Setters
     public void setBalance(double balance) { this.balance = balance; }
+    public void setPassword(String password) { this.password = password; }
     public void addTransaction(Transaction t) { this.transactions.add(t); }
     public void addBeneficiary(Beneficiary b) { this.beneficiaries.add(b); }
 }

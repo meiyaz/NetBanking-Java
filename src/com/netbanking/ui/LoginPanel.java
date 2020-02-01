@@ -39,8 +39,13 @@ public class LoginPanel extends BasePanel {
         JButton btnLogin = new JButton("LOGIN");
         btnLogin.setBounds(350, 260, 100, 30);
         btnLogin.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Login Successful");
-            controller.showCard("Dashboard");
+            String pass = new String(txtPass.getPassword());
+            if (pass.equals(controller.currentUser.getPassword())) {
+                JOptionPane.showMessageDialog(this, "Login Successful");
+                controller.showCard("Dashboard");
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid Password! (Default: admin123)");
+            }
         });
         add(btnLogin);
     }
