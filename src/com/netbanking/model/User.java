@@ -16,6 +16,7 @@ public class User {
     private String password;
     private List<Transaction> transactions;
     private List<Beneficiary> beneficiaries;
+    private List<FixedDeposit> fds;
 
     public User(String name, String an, String ad, String ph, String mo, String dob, String atm, String val, double bal) {
         this.name = name; this.accountNumber = an; this.address = ad; this.phoneNumber = ph;
@@ -23,6 +24,7 @@ public class User {
         this.password = "admin123";
         this.transactions = new ArrayList<>();
         this.beneficiaries = new ArrayList<>();
+        this.fds = new ArrayList<>();
         // Add dummy initial transaction
         transactions.add(new Transaction("01-JAN-2020", "CREDIT", "Opening Balance", bal, bal));
         
@@ -43,10 +45,12 @@ public class User {
     public String getPassword() { return password; }
     public List<Transaction> getTransactions() { return transactions; }
     public List<Beneficiary> getBeneficiaries() { return beneficiaries; }
+    public List<FixedDeposit> getFixedDeposits() { return fds; }
     
     // Setters
     public void setBalance(double balance) { this.balance = balance; }
     public void setPassword(String password) { this.password = password; }
     public void addTransaction(Transaction t) { this.transactions.add(t); }
     public void addBeneficiary(Beneficiary b) { this.beneficiaries.add(b); }
+    public void addFixedDeposit(FixedDeposit fd) { this.fds.add(fd); }
 }

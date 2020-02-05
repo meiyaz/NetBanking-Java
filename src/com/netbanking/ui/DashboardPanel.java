@@ -59,8 +59,13 @@ public class DashboardPanel extends BasePanel {
         btnBills.addActionListener(e -> controller.showCard("Bills"));
         add(btnBills);
         
+        JButton btnFd = new JButton("FIXED DEPOSITS");
+        btnFd.setBounds(250, 420, 200, 40);
+        btnFd.addActionListener(e -> controller.showCard("FixedDeposit"));
+        add(btnFd);
+        
         JButton btnLogout = new JButton("LOGOUT");
-        btnLogout.setBounds(250, 420, 200, 40);
+        btnLogout.setBounds(250, 490, 200, 40);
         btnLogout.addActionListener(e -> controller.showCard("Login"));
         add(btnLogout);
     }

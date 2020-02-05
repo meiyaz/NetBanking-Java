@@ -37,6 +37,7 @@ public class NetBankingFrame extends JFrame {
         mainPanel.add(new BeneficiaryPanel(this, currentUser), "Beneficiaries");
         mainPanel.add(new SettingsPanel(this, currentUser), "Settings");
         mainPanel.add(new BillPaymentPanel(this, currentUser), "Bills");
+        mainPanel.add(new FixedDepositPanel(this, currentUser), "FixedDeposit");
 
         add(mainPanel);
         
