@@ -1,3 +1,5 @@
+package com.netbanking.main;
+
 import javax.swing.SwingUtilities;
 import com.netbanking.ui.NetBankingFrame;
 import com.netbanking.model.DataManager;
