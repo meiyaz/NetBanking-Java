@@ -10,13 +10,17 @@ public class NetBankingFrame extends JFrame {
     JPanel mainPanel;
     User currentUser;
 
-    public NetBankingFrame() {
+    public NetBankingFrame(User user) {
         super("MK BANK OF INDIA");
         
-        // Initialize User Data
-        currentUser = new User("MEIYAZHAGAN KULANDAIVEL", "6078 5184 1274 3157", "NAMAKKAL", 
-                               "90803 35279", "SELF", "11 FEB 2011", 
-                               "**** **** **** *852", "24 - AUG - 2020", 2500000);
+        if (user != null) {
+            this.currentUser = user;
+        } else {
+            // Initialize Default User Data
+            currentUser = new User("MEIYAZHAGAN KULANDAIVEL", "6078 5184 1274 3157", "NAMAKKAL", 
+                                   "90803 35279", "SELF", "11 FEB 2011", 
+                                   "**** **** **** *852", "24 - AUG - 2020", 2500000);
+        }
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
@@ -47,5 +51,9 @@ public class NetBankingFrame extends JFrame {
 
     public void showCard(String cardName) {
         cardLayout.show(mainPanel, cardName);
+    }
+    
+    public User getCurrentUser() {
+        return currentUser;
     }
 }

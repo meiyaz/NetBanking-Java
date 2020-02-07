@@ -1,6 +1,9 @@
 package com.netbanking.model;
 
-public class Beneficiary {
+import java.io.Serializable;
+
+public class Beneficiary implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String name;
     private String accountNumber;
     private String bankName;

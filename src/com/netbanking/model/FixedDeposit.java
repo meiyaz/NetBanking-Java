@@ -1,6 +1,9 @@
 package com.netbanking.model;
 
-public class FixedDeposit {
+import java.io.Serializable;
+
+public class FixedDeposit implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String id;
     private double principal;
     private int durationMonths;
