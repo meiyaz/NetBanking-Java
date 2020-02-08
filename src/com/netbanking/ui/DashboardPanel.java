@@ -16,57 +16,40 @@ public class DashboardPanel extends BasePanel {
     private void initUI() {
         JLabel lblWelcome = new JLabel("Welcome, " + user.getName());
         lblWelcome.setFont(new Font("Arial", Font.BOLD, 18));
-        lblWelcome.setBounds(50, 30, 400, 30);
+        lblWelcome.setBounds(50, 20, 400, 30);
         add(lblWelcome);
 
-        JButton btnProfile = new JButton("USER PROFILE");
-        btnProfile.setBounds(100, 100, 200, 40);
-        btnProfile.addActionListener(e -> controller.showCard("Profile"));
-        add(btnProfile);
+        // Container for buttons
+        JPanel gridPanel = new JPanel(new GridLayout(3, 3, 15, 15));
+        gridPanel.setBounds(50, 70, 700, 400);
 
-        JButton btnBalance = new JButton("CHECK BALANCE");
-        btnBalance.setBounds(400, 100, 200, 40);
-        btnBalance.addActionListener(e -> controller.showCard("Balance"));
-        add(btnBalance);
+        // Add Buttons in logical order
+        gridPanel.add(createTile("PROFILE", e -> controller.showCard("Profile")));
+        gridPanel.add(createTile("BALANCE", e -> controller.showCard("Balance")));
+        gridPanel.add(createTile("TRANSFER", e -> controller.showCard("Transfer")));
+        
+        gridPanel.add(createTile("HISTORY", e -> controller.showCard("Transactions")));
+        gridPanel.add(createTile("BENEFICIARIES", e -> controller.showCard("Beneficiaries")));
+        gridPanel.add(createTile("BILLS", e -> controller.showCard("Bills")));
+        
+        gridPanel.add(createTile("DEPOSITS (FD)", e -> controller.showCard("FixedDeposit")));
+        gridPanel.add(createTile("COMPLAINTS", e -> controller.showCard("Complaints")));
+        gridPanel.add(createTile("SETTINGS", e -> controller.showCard("Settings")));
 
-        JButton btnTransfer = new JButton("TRANSFER CASH");
-        btnTransfer.setBounds(100, 200, 200, 40);
-        btnTransfer.addActionListener(e -> controller.showCard("Transfer"));
-        add(btnTransfer);
-
-        JButton btnComplaint = new JButton("COMPLAINTS");
-        btnComplaint.setBounds(400, 200, 200, 40);
-        btnComplaint.addActionListener(e -> controller.showCard("Complaints"));
-        add(btnComplaint);
-        
-        JButton btnHistory = new JButton("HISTORY");
-        btnHistory.setBounds(250, 270, 200, 40);
-        btnHistory.addActionListener(e -> controller.showCard("Transactions"));
-        add(btnHistory);
-        
-        JButton btnBene = new JButton("BENEFICIARIES");
-        btnBene.setBounds(500, 270, 200, 40);
-        btnBene.addActionListener(e -> controller.showCard("Beneficiaries"));
-        add(btnBene);
-        
-        JButton btnSettings = new JButton("SETTINGS");
-        btnSettings.setBounds(100, 350, 200, 40);
-        btnSettings.addActionListener(e -> controller.showCard("Settings"));
-        add(btnSettings);
-        
-        JButton btnBills = new JButton("BILL PAYMENTS");
-        btnBills.setBounds(400, 350, 200, 40);
-        btnBills.addActionListener(e -> controller.showCard("Bills"));
-        add(btnBills);
-        
-        JButton btnFd = new JButton("FIXED DEPOSITS");
-        btnFd.setBounds(250, 420, 200, 40);
-        btnFd.addActionListener(e -> controller.showCard("FixedDeposit"));
-        add(btnFd);
+        add(gridPanel);
         
         JButton btnLogout = new JButton("LOGOUT");
-        btnLogout.setBounds(250, 490, 200, 40);
+        btnLogout.setBounds(50, 500, 100, 30);
+        btnLogout.setForeground(Color.RED);
         btnLogout.addActionListener(e -> controller.showCard("Login"));
         add(btnLogout);
+    }
+    
+    private JButton createTile(String title, java.awt.event.ActionListener action) {
+        JButton btn = new JButton(title);
+        btn.setFont(new Font("Arial", Font.BOLD, 14));
+        btn.setFocusPainted(false);
+        btn.addActionListener(action);
+        return btn;
     }
 }
