@@ -3,6 +3,7 @@
 *.ctxt
 .mtj.tmp/
 *.jar
+!lib/*.jar
 *.war
 *.nar
 *.ear
@@ -17,3 +18,4 @@ target/
 .idea/
 *.iml
 bin/
+*.db
