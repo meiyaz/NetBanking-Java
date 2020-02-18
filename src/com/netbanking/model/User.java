@@ -7,6 +7,7 @@ import java.io.Serializable;
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     private String name;
+    private String cifNumber;
     private String accountNumber;
     private String address;
     private String phoneNumber;
@@ -20,22 +21,20 @@ public class User implements Serializable {
     private List<Beneficiary> beneficiaries;
     private List<FixedDeposit> fds;
 
-    public User(String name, String an, String ad, String ph, String mo, String dob, String atm, String val, double bal) {
-        this.name = name; this.accountNumber = an; this.address = ad; this.phoneNumber = ph;
+    public User(String name, String cif, String an, String ad, String ph, String mo, String dob, String atm, String val, double bal) {
+        this.name = name; this.cifNumber = cif; this.accountNumber = an; this.address = ad; this.phoneNumber = ph;
         this.mode = mo; this.dateOfOpening = dob; this.atmNumber = atm; this.cardValidity = val; this.balance = bal;
         this.password = "admin123";
         this.transactions = new ArrayList<>();
         this.beneficiaries = new ArrayList<>();
         this.fds = new ArrayList<>();
-        // Add dummy initial transaction
-        transactions.add(new Transaction("01-JAN-2020", "CREDIT", "Opening Balance", bal, bal));
-        
-        // Add dummy beneficiary
-        beneficiaries.add(new Beneficiary("Hari", "123456789", "SBI", "SBI0001", 50000));
+        if (bal > 0) {
+            transactions.add(new Transaction(dateOfOpening, "CREDIT", "Opening Balance", bal, bal));
+        }
     }
 
-    // Getters
     public String getName() { return name; }
+    public String getCifNumber() { return cifNumber; }
     public String getAccountNumber() { return accountNumber; }
     public String getAddress() { return address; }
     public String getPhoneNumber() { return phoneNumber; }
@@ -49,7 +48,6 @@ public class User implements Serializable {
     public List<Beneficiary> getBeneficiaries() { return beneficiaries; }
     public List<FixedDeposit> getFixedDeposits() { return fds; }
     
-    // Setters
     public void setBalance(double balance) { this.balance = balance; }
     public void setPassword(String password) { this.password = password; }
     public void addTransaction(Transaction t) { this.transactions.add(t); }
