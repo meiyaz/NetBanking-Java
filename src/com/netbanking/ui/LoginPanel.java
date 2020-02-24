@@ -2,6 +2,8 @@ package com.netbanking.ui;
 
 import javax.swing.*;
 import java.awt.*;
+import com.netbanking.model.DataManager;
+import com.netbanking.model.User;
 
 public class LoginPanel extends BasePanel {
 
@@ -17,11 +19,11 @@ public class LoginPanel extends BasePanel {
         add(lTitle);
 
         JLabel lSub = new JLabel("WELCOME TO NET BANKING SERVICE");
-        lSub.setBounds(290, 90, 300, 20);
+        lSub.setBounds(270, 90, 400, 20);
         add(lSub);
 
-        JLabel lUser = new JLabel("USER ID :");
-        lUser.setBounds(250, 150, 100, 30);
+        JLabel lUser = new JLabel("CIF NUMBER :");
+        lUser.setBounds(220, 150, 130, 30);
         add(lUser);
 
         JTextField txtUser = new JTextField();
@@ -39,14 +41,25 @@ public class LoginPanel extends BasePanel {
         JButton btnLogin = new JButton("LOGIN");
         btnLogin.setBounds(350, 260, 100, 30);
         btnLogin.addActionListener(e -> {
+            String accNo = txtUser.getText();
             String pass = new String(txtPass.getPassword());
-            if (pass.equals(controller.currentUser.getPassword())) {
+            
+            User dbUser = DataManager.loadUser(accNo, pass);
+            
+            if (dbUser != null) {
+                txtUser.setText("");
+                txtPass.setText("");
                 JOptionPane.showMessageDialog(this, "Login Successful");
-                controller.showCard("Dashboard");
+                controller.login(dbUser);
             } else {
-                JOptionPane.showMessageDialog(this, "Invalid Password! (Default: admin123)");
+                JOptionPane.showMessageDialog(this, "Invalid CIF Number or Password!");
             }
         });
         add(btnLogin);
+        
+        JButton btnRegister = new JButton("CREATE ACCOUNT");
+        btnRegister.setBounds(330, 320, 150, 30);
+        btnRegister.addActionListener(e -> controller.showCard("Register"));
+        add(btnRegister);
     }
 }
