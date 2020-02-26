@@ -8,7 +8,7 @@ public abstract class BasePanel extends JPanel {
 
     public BasePanel(NetBankingFrame controller) {
         this.controller = controller;
-        setLayout(null); // Keep absolute layout for now to match original design
+        setLayout(null);
     }
 
     protected void addBackButton() {

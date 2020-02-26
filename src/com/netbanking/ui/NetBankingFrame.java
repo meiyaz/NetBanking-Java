@@ -3,6 +3,7 @@ package com.netbanking.ui;
 import javax.swing.*;
 import java.awt.*;
 import com.netbanking.model.User;
+import com.netbanking.model.DataManager;
 
 public class NetBankingFrame extends JFrame {
     
@@ -10,18 +11,9 @@ public class NetBankingFrame extends JFrame {
     JPanel mainPanel;
     User currentUser;
 
-    public NetBankingFrame(User user) {
+    public NetBankingFrame() {
         super("MK BANK OF INDIA");
         
-        if (user != null) {
-            this.currentUser = user;
-        } else {
-            // Initialize Default User Data
-            currentUser = new User("MEIYAZHAGAN KULANDAIVEL", "6078 5184 1274 3157", "NAMAKKAL", 
-                                   "90803 35279", "SELF", "11 FEB 2011", 
-                                   "**** **** **** *852", "24 - AUG - 2020", 2500000);
-        }
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
@@ -29,9 +21,31 @@ public class NetBankingFrame extends JFrame {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         
-        // Add Panels
-        // Pass 'this' as controller to panels
+        // Add only Login natively at startup
         mainPanel.add(new LoginPanel(this), "Login");
+        mainPanel.add(new RegistrationPanel(this), "Register");
+        
+        add(mainPanel);
+        
+        // Save on exit
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            if (currentUser != null) {
+                DataManager.saveUser(currentUser);
+            }
+        }));
+        
+        cardLayout.show(mainPanel, "Login");
+        setVisible(true);
+    }
+
+    public void login(User user) {
+        this.currentUser = user;
+        
+        // Ensure old components are removed if logging in again
+        mainPanel.removeAll();
+        mainPanel.add(new LoginPanel(this), "Login");
+        mainPanel.add(new RegistrationPanel(this), "Register");
+        
         mainPanel.add(new DashboardPanel(this, currentUser), "Dashboard");
         mainPanel.add(new ProfilePanel(this, currentUser), "Profile");
         mainPanel.add(new BalancePanel(this, currentUser), "Balance");
@@ -42,11 +56,19 @@ public class NetBankingFrame extends JFrame {
         mainPanel.add(new SettingsPanel(this, currentUser), "Settings");
         mainPanel.add(new BillPaymentPanel(this, currentUser), "Bills");
         mainPanel.add(new FixedDepositPanel(this, currentUser), "FixedDeposit");
-
-        add(mainPanel);
         
-        cardLayout.show(mainPanel, "Login");
-        setVisible(true);
+        mainPanel.revalidate();
+        mainPanel.repaint();
+        
+        showCard("Dashboard");
+    }
+
+    public void logout() {
+        if(currentUser != null) {
+            DataManager.saveUser(currentUser);
+        }
+        this.currentUser = null;
+        showCard("Login");
     }
 
     public void showCard(String cardName) {
