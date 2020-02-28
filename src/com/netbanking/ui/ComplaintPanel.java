@@ -39,7 +39,6 @@ public class ComplaintPanel extends BasePanel {
             }
         });
 
-        // Contact Info
         JLabel lContact = new JLabel("CUSTOMER CARE : 95249 14630");
         lContact.setBounds(450, 400, 300, 30);
         add(lContact);

@@ -26,12 +26,10 @@ public class DashboardPanel extends BasePanel {
         navbar.setBackground(new Color(255, 255, 255));
         navbar.setBorder(new EmptyBorder(15, 40, 15, 40));
         
-        // Brand Logo Text
         JLabel brand = new JLabel("MK BANK");
         brand.setFont(new Font("Segoe UI", Font.BOLD, 26));
-        brand.setForeground(new Color(30, 60, 114)); // Deep Royal Blue
+        brand.setForeground(new Color(30, 60, 114));
         
-        // User Profile Corner
         JPanel userCorner = new JPanel(new FlowLayout(FlowLayout.RIGHT, 20, 0));
         userCorner.setOpaque(false);
         
@@ -40,7 +38,7 @@ public class DashboardPanel extends BasePanel {
         userName.setForeground(Color.DARK_GRAY);
         
         JButton btnLogout = createButton("Logout", new Color(255, 75, 75));
-        btnLogout.addActionListener(e -> controller.showCard("Login"));
+        btnLogout.addActionListener(e -> controller.logout());
 
         userCorner.add(userName);
         userCorner.add(btnLogout);
@@ -50,13 +48,11 @@ public class DashboardPanel extends BasePanel {
         
         add(navbar, BorderLayout.NORTH);
 
-        // --- 2. Main Dashboard Area ---
         JPanel mainContent = new JPanel();
         mainContent.setLayout(new BoxLayout(mainContent, BoxLayout.Y_AXIS));
         mainContent.setBorder(new EmptyBorder(30, 40, 30, 40));
         mainContent.setOpaque(false);
 
-        // Summary Card
         JPanel summaryCard = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -87,7 +83,6 @@ public class DashboardPanel extends BasePanel {
         mainContent.add(summaryCard);
         mainContent.add(Box.createRigidArea(new Dimension(0, 30)));
         
-        // Grid Section Title
         JLabel lblQuick = new JLabel("Quick Actions");
         lblQuick.setFont(new Font("Segoe UI", Font.BOLD, 18));
         lblQuick.setForeground(new Color(60, 70, 80));
@@ -95,8 +90,7 @@ public class DashboardPanel extends BasePanel {
         mainContent.add(lblQuick);
         mainContent.add(Box.createRigidArea(new Dimension(0, 15)));
 
-        // Grid Menu
-        JPanel grid = new JPanel(new GridLayout(2, 4, 20, 20)); // 2 Rows, 4 Cols
+        JPanel grid = new JPanel(new GridLayout(2, 4, 20, 20));
         grid.setOpaque(false);
         grid.setMaximumSize(new Dimension(2000, 300));
 
@@ -126,7 +120,6 @@ public class DashboardPanel extends BasePanel {
         return btn;
     }
 
-    // Inner Class for Fancy Tile
     class DashboardTile extends JPanel {
         private Color accent;
         
@@ -162,12 +155,10 @@ public class DashboardPanel extends BasePanel {
             g2.setColor(Color.WHITE);
             g2.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
             
-            // Top Accent Bar
             g2.setColor(accent);
-            g2.fillRoundRect(0, 0, getWidth(), 6, 15, 15); // Draw full round rect first
-            g2.fillRect(0, 3, getWidth(), 3); // Fill bottom so it looks like a top bar
+            g2.fillRoundRect(0, 0, getWidth(), 6, 15, 15);
+            g2.fillRect(0, 3, getWidth(), 3);
             
-            // Subtle Border
             g2.setColor(new Color(230, 230, 230));
             g2.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, 15, 15);
         }

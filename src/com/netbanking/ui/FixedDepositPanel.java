@@ -27,7 +27,6 @@ public class FixedDepositPanel extends BasePanel {
         lTitle.setBounds(300, 20, 300, 30);
         add(lTitle);
 
-        // --- Calculator / Booking Section ---
         JLabel lNew = new JLabel("OPEN NEW FD");
         lNew.setFont(new Font("Arial", Font.BOLD, 14));
         lNew.setBounds(50, 70, 200, 20);
@@ -55,7 +54,6 @@ public class FixedDepositPanel extends BasePanel {
         btnBook.setBounds(300, 180, 120, 30);
         add(btnBook);
         
-        // Logic
         btnCalc.addActionListener(e -> {
             calculateMaturity(tPrincipal, cbDuration, tRate, tMaturity);
         });
@@ -64,7 +62,6 @@ public class FixedDepositPanel extends BasePanel {
             bookFD(tPrincipal, cbDuration, tRate, tMaturity);
         });
         
-        // --- Active FDs Table ---
         JLabel lActive = new JLabel("YOUR ACTIVE DEPOSITS");
         lActive.setFont(new Font("Arial", Font.BOLD, 14));
         lActive.setBounds(50, 240, 300, 20);
@@ -88,8 +85,6 @@ public class FixedDepositPanel extends BasePanel {
             int m = Integer.parseInt((String)cbD.getSelectedItem());
             double r = Double.parseDouble(tR.getText());
             
-            // Simple Interest for simplicity: A = P(1 + rt) 
-            // t is in years (m/12)
             double tVar = m / 12.0;
             double maturity = p * (1 + (r * tVar / 100.0));
             tM.setText(String.format("%.2f", maturity));
@@ -112,15 +107,12 @@ public class FixedDepositPanel extends BasePanel {
                  return;
              }
 
-             // Deduct Balance
              user.setBalance(user.getBalance() - p);
              
-             // Create FD
              String date = new SimpleDateFormat("dd-MMM-yyyy").format(new Date());
              FixedDeposit fd = new FixedDeposit("FD" + (int)(Math.random()*10000), p, moons, rate, amt, date);
              user.addFixedDeposit(fd);
              
-             // Log Transaction
              Transaction t = new Transaction(date, "DEBIT", "FD Booking: " + fd.getId(), p, user.getBalance());
              user.addTransaction(t);
              
